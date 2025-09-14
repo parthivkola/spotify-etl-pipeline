@@ -1,6 +1,6 @@
 # Spotify Data ETL Pipeline
 
-## Description
+## 📄 Description
 
 This project is a complete Extract, Transform, and Load (ETL) pipeline built with Python. It extracts song data from a Kaggle CSV file, performs data cleaning and transformation using Pandas, and loads the processed data into a PostgreSQL database for analysis.
 
