@@ -1,67 +1,83 @@
-# Spotify Data ETL Pipeline
 
-## 📄 Description
+# 🎵 Spotify Data ETL Pipeline
 
-This project is a complete Extract, Transform, and Load (ETL) pipeline built with Python. It extracts song data from a Kaggle CSV file, performs data cleaning and transformation using Pandas, and loads the processed data into a PostgreSQL database for analysis.
+## 📖 *Overview*
+A simple **ETL pipeline** in Python:
+- **Extract** → Read raw Kaggle CSV dataset  
+- **Transform** → Clean, handle missing values, add new columns  
+- **Load** → Save into PostgreSQL + local CSV  
 
-This project demonstrates core data engineering skills, including data processing with Pandas, database management with PostgreSQL, and secure credential handling using environment variables.
-
----
-
-## 🛠️ Tech Stack
-
-- **Language:** Python 3.13
-- **Database:** PostgreSQL
-- **Key Libraries:**
-    - Pandas
-    - SQLAlchemy
-    - psycopg2-binary
-    - python-dotenv
+This project demonstrates:
+* Data cleaning with **pandas**  
+* Secure credential handling with **dotenv**  
+* Database integration with **SQLAlchemy + PostgreSQL**  
 
 ---
 
-## ⚙️ Setup and Installation
+## 🛠 *Tech Stack*
+* **Language** → Python 3.11+  
+* **Database** → PostgreSQL  
+* **Libraries** → pandas, SQLAlchemy, psycopg2-binary, python-dotenv  
 
-To run this project locally, please follow these steps:
+---
 
-**1. Clone the Repository**
+## ⚙️ *Setup*
+
+### 1. Clone Repo
 ```bash
-git clone [https://github.com/parthivkola/spotify-etl-pipeline.git](https://github.com/parthivkola/spotify-etl-pipeline.git)
+git clone https://github.com/parthivkola/spotify-etl-pipeline.git
 cd spotify-etl-pipeline
 ```
 
-**2. Manual Setup:**
+### 2. Create Virtual Environment
 ```bash
-conda create --name ml_project python=3.13
-conda activate ml_project
+conda create --name spotify_etl python=3.11
+conda activate spotify_etl
 pip install -r requirements.txt
 ```
 
-**3. Set Up PostgreSQL Database**
+### 3. Configure PostgreSQL
+* Create DB → `spotify_db`  
+* Create user with permissions  
 
-  - Ensure you have a PostgreSQL server running.
-  - Create a new database and a user with permissions to access it.
-
-**4. Configure Environment Variables**
-
-  - This project uses a `.env` file to manage database credentials.
-  - Create your own `.env` file by copying the template:
-    ```bash
-    cp .env.example .env
-    ```
-  - Open the newly created `.env` file and fill in your actual database credentials.
-
------
-
-## ▶️ Usage
-
-Once the setup is complete, you can run the entire ETL pipeline with a single command from your terminal:
-
+### 4. Configure Environment Variables
 ```bash
-python pipeline.py
+cp .env.example .env
 ```
 
-The script will connect to the database, process the `dataset.csv` file, and load the cleaned data into the `popular_tracks` table. You can then connect to your PostgreSQL database to view and query the final table.
+Fill in:
+```
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=spotify_db
+```
 
+---
+
+## ▶️ *Run the Pipeline*
+```bash
+python main.py
 ```
+
+Steps:
+* Extract → from `dataset.csv`  
+* Transform → clean + add `duration_min`  
+* Load → into Postgres (`popular_tracks`)  
+
+Query data:
+```sql
+SELECT * FROM popular_tracks LIMIT 10;
 ```
+
+---
+
+## 📊 *Example Output*
+
+| track_name | artist_name | duration_min | popularity |
+|------------|-------------|--------------|-------------|
+| Song A     | Artist 1    | 3.5          | 85          |
+| Song B     | Artist 2    | 4.1          | 90          |
+
+---
