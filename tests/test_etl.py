@@ -1,6 +1,6 @@
 import pandas as pd
-import pytest
-from etl_project.transform import transform_data
+import pytest # type: ignore
+from etl_project.transform import transform_data # type: ignore
 
 
 def test_transform_data():
